@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    container_name: iz-laravel10-vue3-app
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - db
+    networks:
+      - iz-laravel10-vue3-network
+
+  web:
+    image: nginx:alpine
+    container_name: iz-laravel10-vue3-web
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - iz-laravel10-vue3-network
+
+  db:
+    image: postgres:15-alpine
+    container_name: iz-laravel10-vue3-db
+    environment:
+      POSTGRES_DB: laravel
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - iz-laravel10-vue3-network
+
+  node:
+    image: node:18
+    container_name: iz-laravel10-vue3-node
+    volumes:
+      - ./src:/app
+    working_dir: /app
+    command: "tail -f /dev/null"
+    ports:
+      - "5173:5173"
+    networks:
+      - iz-laravel10-vue3-network
+
+networks:
+  iz-laravel10-vue3-network:
+    driver: bridge
+
+volumes:
+  dbdata:
