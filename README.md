@@ -35,6 +35,9 @@ docker exec iz-laravel10-vue3-app php artisan key:generate
 # Set up the database
 docker exec iz-laravel10-vue3-app php artisan migrate:fresh
 
+# Seed the database
+docker exec -it laravel-vue-25-app php artisan db:seed
+
 # Install frontend dependencies
 docker exec iz-laravel10-vue3-node npm install
 
@@ -66,6 +69,28 @@ To exit the database prompt, type:
 ```
 \q
 ```
+
+## App Usage
+
+### Accessing the Application
+1. Open your web browser and navigate to: [http://localhost:8000](http://localhost:8000)
+
+### Default User Accounts
+The application comes with two pre-configured user accounts:
+
+#### Regular User
+- **Email:** user@example.com
+- **Password:** password
+
+#### Administrator
+- **Email:** admin@example.com
+- **Password:** password
+
+### Security Note
+For production environments:
+1. Change these default credentials immediately after setup
+2. Create new user accounts and delete these default accounts
+3. Consider implementing stronger password policies
 
 ## Troubleshooting
 
