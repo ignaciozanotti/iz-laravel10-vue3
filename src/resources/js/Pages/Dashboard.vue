@@ -1,7 +1,15 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
-defineProps(['message']);
+import { useAuthStore } from '@/Stores/auth';
+
+const { message, token } = defineProps(['message', 'token']);
+const authStore = useAuthStore();
+
+if (token) {
+    authStore.setToken(token);
+}
+
 </script>
 
 <template>

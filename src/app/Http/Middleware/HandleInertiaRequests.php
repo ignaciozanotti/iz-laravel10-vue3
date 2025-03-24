@@ -37,6 +37,7 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'error' => fn () => $request->session()->get('error'),
             ],
+            'token' => $request->user() ? $request->user()->createToken('auth-token')->plainTextToken : null,
         ];
     }
 }
