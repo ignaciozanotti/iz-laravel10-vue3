@@ -27,12 +27,6 @@ createInertiaApp({
         router.on('before', (event) => {
             authStore.loadToken();
             const token = authStore.token;
-            //delete me
-            console.log('Inertia Request:', {
-                url: event.detail.visit.url,
-                method: event.detail.visit.method,
-                token: token,
-            });
             if (token) {
                 event.detail.visit.headers['Authorization'] = `Bearer ${token}`;
             }
