@@ -10,4 +10,11 @@ export default defineConfig({
     }),
     vue(),
   ],
+  // Vite needs to bind to 0.0.0.0 (all interfaces) inside the container so it’s accessible from the host via localhost:5173 // ended up adding --host for dev script in src/package.json
+  /*
+  server: {
+    host: '0.0.0.0', // Bind to all interfaces
+    port: 5173,
+  },
+  */
 });
