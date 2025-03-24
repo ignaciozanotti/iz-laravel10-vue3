@@ -10,11 +10,15 @@ docker-compose up -d --build
 
 docker ps
 
-### Verify PHP-FPM
+### Generate Application Key
 
-curl http://localhost:8000
+docker exec -it iz-laravel10-vue3-php php artisan key:generate
 
-Verify the output is `Hello from PHP-FPM!%`
+### Initialize the Database
+
+For first-time setup, migrate the database and seed it with initial data:
+
+docker exec -it iz-laravel10-vue3-php php artisan migrate:fresh
 
 ### Verify Node Container
 
