@@ -36,7 +36,7 @@ docker exec iz-laravel10-vue3-app php artisan key:generate
 docker exec iz-laravel10-vue3-app php artisan migrate:fresh
 
 # Seed the database
-docker exec -it laravel-vue-25-app php artisan db:seed
+docker exec iz-laravel10-vue3-app php artisan db:seed
 
 # Install frontend dependencies
 docker exec iz-laravel10-vue3-node npm install
